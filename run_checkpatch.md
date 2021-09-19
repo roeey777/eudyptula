@@ -1,3 +1,3 @@
 ```bash
-	scripts/checkpatch.pl --no-tree --file </path/to/examined/file.c>
+	</path/to/>/checkpatch.pl --no-tree --file </path/to/examined/file.c>
 ```
