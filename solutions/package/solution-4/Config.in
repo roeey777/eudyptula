@@ -1,0 +1,6 @@
+config BR2_PACKAGE_SOLUTION_4
+    bool "solution #4"
+    default n
+    depends on BR2_LINUX_KERNEL
+    help
+        Solution for eudyptula challenge #4 - fix styling issues for solution of challenge #1.
