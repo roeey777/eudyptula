@@ -1,9 +1,11 @@
 # Creating a Patch to a Package in Buildroot using ``Git``:
 
+
 ### First Step - getting a clone of the code.
 There are 2 ways to do so:
 - use ``buildroot`` to fetch the source code for us.
 - fetch the source code manually.
+
 
 #### Fetching Source Code Using ``Buildroot``:
 ```bash
@@ -15,17 +17,22 @@ OR
 ```
 
 Let's assume that our package is called "linux" (in this challenge, challenge #3, it
+
 actually is the name of our desired package for patching).
+
 Then we should execute the following command:
+
 ```bash
 	make linux-source
 ```
 OR fetch the source code of linux manually:
+
 ```bash
 	git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
 ```
 
 In case we've used ``buildroot`` we should do the following step as well.
+
 ```bash
 	cd </path/to/buildroot>/output/build/<package-name>
         git init
@@ -55,5 +62,5 @@ In order for us to create the patch file we will use ``git`` since ``git format-
 can create patch files which includes commit messages.
 Creating patches is simple, it only requires executing the following command:
 ```bash
-	git format-patch -M -N --signoff -1 HEAD -o <where to store the new pathc file>
+	git format-patch -M -N --signoff -1 HEAD -o <where to store the new patch file>
 ```
