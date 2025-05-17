@@ -1,6 +1,6 @@
 Build an image using Buildroot for emulation by QEMU.
 
 ```bash
-	make -C buildroot qemu_x86_64_defconfig
+	make -C buildroot/ eudyptula_qemu_x86_64_defconfig
 	make -C buildroot all
 ```

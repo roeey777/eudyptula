@@ -14,12 +14,12 @@ index 9b6c90eed5e9..26ae3a270822 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -2,7 +2,7 @@
- VERSION = 5
- PATCHLEVEL = 10
- SUBLEVEL = 7
+ VERSION = 6
+ PATCHLEVEL = 1
+ SUBLEVEL = 26
 -EXTRAVERSION =
 +EXTRAVERSION = -eudyptula-challenge-solution-3
- NAME = Kleptomaniac Octopus
+ NAME = Hurr durr I'ma ninja sloth
  
  # *DOCUMENTATION*
 -- 
