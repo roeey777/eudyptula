@@ -19,9 +19,7 @@ docs:
 
 .PHONY: publish-docs
 publish-docs: docs
-	pre-commit uninstall
 	cd $(DOCS_BUILD_DIR) && git add -A . && git commit -sm "$(COMMIT_MSG)." && git push origin gh-pages
-	pre-commit install
 
 .PHONY: clean-docs
 clean-docs:
