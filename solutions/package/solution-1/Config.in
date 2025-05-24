@@ -1,6 +1,0 @@
-config BR2_PACKAGE_SOLUTION_1
-    bool "solution #1"
-    default n
-    depends on BR2_LINUX_KERNEL
-    help
-        Solution for eudyptula challenge #1.

@@ -1,6 +1,0 @@
-config BR2_PACKAGE_HELLO
-    bool "hello"
-    default n
-    depends on BR2_LINUX_KERNEL
-    help
-        Solution for eudyptula challenge #1.

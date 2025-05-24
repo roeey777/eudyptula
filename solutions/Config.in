@@ -1,5 +1,0 @@
-menu "Eudyptula"
-
-source "$BR2_EXTERNAL_EUDYPTULA_PATH/package/Config.in"
-
-endmenu
