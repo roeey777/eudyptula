@@ -1,7 +1,7 @@
 Generate The Documentation
 --------------------------
 
-This project uses ``sphinx`` in order to generate it's documentation & hosts them on `Github Pages <https://roeey777.github.io/eydyptula/>`_.
+This project uses ``sphinx`` in order to generate it's documentation & hosts them on `Github Pages <https://roeey777.github.io/eudyptula/>`_.
 There are a few steps for generating & hosting documentation.
 
 Automatic generation of documentation
