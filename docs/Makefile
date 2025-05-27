@@ -29,4 +29,4 @@ clean:
 	# sphinx-build -M clean also removes the .git **file** which makes the
 	# git worktree "orphan", so now fix this by re-adding the worktree.
 	-git worktree remove $(WORKTREE_DIR)
-	git worktree add $(WORKTREE_DIR) -B $(GITHUB_PAGES_BRANCH)
+	git worktree add $(WORKTREE_DIR) $(GITHUB_PAGES_BRANCH)

@@ -16,11 +16,11 @@ clean-build:
 
 .PHONY: docs
 docs:
-	sphinx-build $(DOCS_SOURCE_DIR) $(DOCS_BUILD_DIR)
+	make -C docs/ html
 
 .PHONY: publish-docs
 publish-docs: docs
-	cd $(DOCS_BUILD_DIR) && git add -A . && git commit -sm "$(COMMIT_MSG)." && git push origin gh-pages
+	cd $(DOCS_BUILD_DIR) && git add -A . && git commit -sm "$(COMMIT_MSG)." && git push origin $(GITHUB_PAGES_BRANCH)
 
 .PHONY: clean-docs
 clean-docs:
