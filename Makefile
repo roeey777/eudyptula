@@ -1,6 +1,7 @@
 DOCS_SOURCE_DIR := docs/source
 DOCS_BUILD_DIR := docs/build/html
-COMMIT_ID := $(shell git rev-parse HEAD)
+GITHUB_PAGES_BRANCH := gh-pages
+COMMIT_ID := $(shell git rev-parse $(GITHUB_PAGES_BRANCH))
 COMMIT_MSG := $(addprefix Documentation for commit ,$(COMMIT_ID))
 
 .PHONY: all
