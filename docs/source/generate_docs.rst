@@ -7,6 +7,38 @@ There are a few steps for generating & hosting documentation.
 Automatic generation of documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+.. note::
+
+   For a clean/fresh clone of this repo one should execute the following command only **ONCE**
+   **before** to the rest of the steps. The command is:
+
+   .. code-block:: bash
+
+      # from the repo's top directory
+      git worktree add docs/build/html -B gh-pages
+
+   The rest of the automatic *publishing* of the documentation heavily relies on ``git worktree`` feature.
+   We expect to have a ``git worktree`` in ``docs/build/html/`` checkout on branch ``gh-pages``.
+   You can verify it by the following commands:
+
+   .. code-block:: bash
+
+      # you should see 2 worktrees, one of the repo's top directory on your branch, i.e. ``master``, ``dev``, etc.
+      # and another in ``docs/build/html/`` on ``gh-pages`` branch.
+      git worktree list
+
+   Another way to verify it is:
+
+   .. code-block:: bash
+
+      # should tell you are checked-out to your branch.
+      git branch
+
+      cd docs/build/html/
+      # should tell you are checked-out to gh-pages branch.
+      git branch
+
 You should execute the following commands:
 
 .. code-block:: bash
