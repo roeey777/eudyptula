@@ -95,6 +95,32 @@
 There are a few steps for generating &amp; hosting documentation.</p>
 <section id="automatic-generation-of-documentation">
 <h2>Automatic generation of documentation<a class="headerlink" href="#automatic-generation-of-documentation" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a clean/fresh clone of this repo one should execute the following command only <strong>ONCE</strong>
+<strong>before</strong> to the rest of the steps. The command is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># from the repo&#39;s top directory</span>
+git<span class="w"> </span>worktree<span class="w"> </span>add<span class="w"> </span>docs/build/html<span class="w"> </span>-B<span class="w"> </span>gh-pages
+</pre></div>
+</div>
+<p>The rest of the automatic <em>publishing</em> of the documentation heavily relies on <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">worktree</span></code> feature.
+We expect to have a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">worktree</span></code> in <code class="docutils literal notranslate"><span class="pre">docs/build/html/</span></code> checkout on branch <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>.
+You can verify it by the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># you should see 2 worktrees, one of the repo&#39;s top directory on your branch, i.e. ``master``, ``dev``, etc.</span>
+<span class="c1"># and another in ``docs/build/html/`` on ``gh-pages`` branch.</span>
+git<span class="w"> </span>worktree<span class="w"> </span>list
+</pre></div>
+</div>
+<p>Another way to verify it is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># should tell you are checked-out to your branch.</span>
+git<span class="w"> </span>branch
+
+<span class="nb">cd</span><span class="w"> </span>docs/build/html/
+<span class="c1"># should tell you are checked-out to gh-pages branch.</span>
+git<span class="w"> </span>branch
+</pre></div>
+</div>
+</div>
 <p>You should execute the following commands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># from docs/</span>
 make<span class="w"> </span>clean
