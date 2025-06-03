@@ -6,25 +6,48 @@
 #include <linux/miscdevice.h>
 #include <linux/string.h>
 
-#ifndef EUDYPTULA_MISC_BUFFER_SIZE
-#define EUDYPTULA_MISC_BUFFER_SIZE 256
+#ifndef UNUSED
+#define UNUSED(x) ((void)x)
 #endif
 
+#define EUDYPTULA_DEVICE_NAME "eudyptula"
+#define EUDYPTULA_MISC_BUFFER_SIZE 256
+
+static const char *ID = "roeey777";
+static const size_t ID_LENGTH = sizeof(ID) / sizeof(*ID);
 static const char *SECRET = "eudyptula";
 static const size_t SECRET_LENGTH = sizeof(SECRET) / sizeof(*SECRET);
 static char misc_buffer[EUDYPTULA_MISC_BUFFER_SIZE];
 
-static ssize_t eudyptula_write(struct file *fp, const char __user *user_buf,
-				size_t count, loff_t *f_pos)
+static ssize_t eudyptula_read(struct file *fp, char __user *user_buf, size_t length, loff_t *offset)
 {
 	int status = -EINVAL;
+
+	UNUSED(fp);
+
+	/* copy the ID from kernel-space to user-space */
+	status = simple_read_from_buffer(user_buf,
+					 length,
+					 offset,
+					 ID,
+					 ID_LENGTH);
+
+	return (ssize_t)status;
+}
+
+static ssize_t eudyptula_write(struct file *fp, const char __user *user_buf,
+				size_t count, loff_t *offset)
+{
+	int status = -EINVAL;
+
+	UNUSED(fp);
 
 	(void)memset(misc_buffer, '\0', EUDYPTULA_MISC_BUFFER_SIZE);
 
 	/* copy data from userspace */
 	status = simple_write_to_buffer(misc_buffer,
 					EUDYPTULA_MISC_BUFFER_SIZE,
-					f_pos,
+					offset,
 					user_buf,
 					count);
 	if (status < 0) {
@@ -32,7 +55,7 @@ static ssize_t eudyptula_write(struct file *fp, const char __user *user_buf,
 		return (ssize_t)status;
 	}
 
-	if (strncmp(SECRET, misc_buffer, SECRET_LENGTH)) {
+	if (strncmp(SECRET, misc_buffer, EUDYPTULA_MISC_BUFFER_SIZE)) {
 		pr_warn("The given data (%s) isn't the secret!\n", misc_buffer);
 		return -EINVAL;
 	}
@@ -40,14 +63,15 @@ static ssize_t eudyptula_write(struct file *fp, const char __user *user_buf,
 	return (ssize_t)status;
 }
 
-static struct file_operations eudyptula_fops = {
+static const struct file_operations eudyptula_fops = {
 	.owner =    THIS_MODULE,
+	.read  =    eudyptula_read,
 	.write =    eudyptula_write,
 };
 
 static struct miscdevice eudyptula_misc = {
 	.minor = MISC_DYNAMIC_MINOR,
-	.name = "eudyptula",
+	.name = EUDYPTULA_DEVICE_NAME,
 	.fops = &eudyptula_fops,
 };
 
