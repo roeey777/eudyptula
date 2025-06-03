@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; Eudyptula  documentation</title>
+  <title>Solution to Challenge #6 &mdash; Eudyptula  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -28,8 +28,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Checkpatch" href="checkpatch.html" />
-    <link rel="prev" title="Eudyptula documentation" href="index.html" /> 
+    <link rel="prev" title="Solutions" href="solutions.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,16 +52,16 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#buildroot-prerequisites"><code class="docutils literal notranslate"><span class="pre">Buildroot</span></code> Prerequisites</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="checkpatch.html">Checkpatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="build_image.html">Building an Image</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run_qemu.html">Running in QEMU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run_qemu.html#challenge-5">Challenge #5:</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate_docs.html">Generate The Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solutions.html">Solutions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="solutions.html">Solutions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Solution to Challenge #6</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -79,9 +78,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Installation</li>
+          <li class="breadcrumb-item"><a href="solutions.html">Solutions</a></li>
+      <li class="breadcrumb-item active">Solution to Challenge #6</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/solution_6.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -89,28 +89,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<p>In this section we will cover on how to install all the prerequisites required by this project.</p>
-<section id="buildroot-prerequisites">
-<h2><code class="docutils literal notranslate"><span class="pre">Buildroot</span></code> Prerequisites<a class="headerlink" href="#buildroot-prerequisites" title="Link to this heading"></a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This will work only for Debian/Ubuntu.</p>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
-sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>libncurses5-dev<span class="w"> </span>rsync<span class="w"> </span>cpio<span class="w"> </span>python<span class="w"> </span>unzip<span class="w"> </span>bc<span class="w"> </span>wget<span class="w"> </span>patch<span class="w"> </span>bc<span class="w"> </span>bzip2<span class="w"> </span>ncurses-dev<span class="w"> </span>git<span class="w"> </span>make<span class="w"> </span>g++<span class="w"> </span>bash<span class="w"> </span>gcc<span class="w"> </span>git<span class="w"> </span>gzip<span class="w"> </span>locales<span class="w"> </span>mercurial<span class="w"> </span>whois<span class="w"> </span>patch<span class="w"> </span>perl<span class="w"> </span>sed<span class="w"> </span>tar<span class="w"> </span>wget<span class="w"> </span>-y
+  <section id="solution-to-challenge-6">
+<h1>Solution to Challenge #6<a class="headerlink" href="#solution-to-challenge-6" title="Link to this heading"></a></h1>
+<p>In this challenge, I was asked to implement a small misc char device which controls the
+return code of the syscall <code class="docutils literal notranslate"><span class="pre">write</span></code> based on the given data from the user. If the given data
+matches the secret then the return code should be valid, otherwise <code class="docutils literal notranslate"><span class="pre">EINVAL</span></code> should be returned,
+The testing flow is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dmesg<span class="w"> </span>-c<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w">                </span><span class="c1"># clear the current kernel log.</span>
+lsmod<span class="w">                               </span><span class="c1"># see the module isn&#39;t loaded yet.</span>
+ls<span class="w"> </span>/dev/eudyptula<span class="w">                   </span><span class="c1"># verify there is no such device yet.</span>
+
+modprobe<span class="w"> </span>solution_6<span class="w">                 </span><span class="c1"># load the kernel module.</span>
+dmesg<span class="w"> </span>-c<span class="w">                            </span><span class="c1"># see the loading logs of the module.</span>
+lsmod<span class="w">                               </span><span class="c1"># see that the module is currently loaded.</span>
+ls<span class="w"> </span>/dev/eudyptula<span class="w">                   </span><span class="c1"># verify that there is char device.</span>
+<span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span>eudyptula<span class="w"> </span>&gt;<span class="w"> </span>/dev/eudyptula<span class="w">  </span><span class="c1"># write the &quot;secret&quot; into the device.</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">                             </span><span class="c1"># expect to see 0, indicating success.</span>
+dmesg<span class="w"> </span>-c<span class="w">                            </span><span class="c1"># verify there is no error logs.</span>
+
+<span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span>nonsense<span class="w"> </span>&gt;<span class="w"> </span>/dev/eudyptula<span class="w">   </span><span class="c1"># write something else than the &quot;secret&quot; into the device.</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">                             </span><span class="c1"># expect to see 1, indicating failure.</span>
+dmesg<span class="w"> </span>-c<span class="w">                            </span><span class="c1"># verify there is an error log indicating that nonsense isn&#39;t the &quot;secret&quot;.</span>
+
+modprobe<span class="w"> </span>-r<span class="w"> </span>solution_6<span class="w">              </span><span class="c1"># unload the kernel module.</span>
+dmesg<span class="w"> </span>-c<span class="w">                            </span><span class="c1"># see the unloading logs of the module.</span>
+lsmod<span class="w">                               </span><span class="c1"># see that the module isn&#39;t loaded.</span>
+ls<span class="w"> </span>/dev/eudyptula<span class="w">                   </span><span class="c1"># verify that there is no such char device.</span>
 </pre></div>
 </div>
-</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Eudyptula documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="checkpatch.html" class="btn btn-neutral float-right" title="Checkpatch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="solutions.html" class="btn btn-neutral float-left" title="Solutions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

@@ -59,6 +59,7 @@
 <li class="toctree-l1"><a class="reference internal" href="run_qemu.html">Running in QEMU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run_qemu.html#challenge-5">Challenge #5:</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate_docs.html">Generate The Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">Solutions</a></li>
 </ul>
 
         </div>
@@ -90,6 +91,14 @@
 <p>Checkpatch is the code-linter used for enforcing the Linux kernel C-code conventions.
 One can find more information about it in <a class="reference external" href="https://docs.kernel.org/dev-tools/checkpatch.html">here</a></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;/path/to/&gt;/checkpatch.pl<span class="w"> </span>--no-tree<span class="w"> </span>--file<span class="w"> </span>&lt;/path/to/examined/file.c&gt;
+</pre></div>
+</div>
+<p>If one shall desires to execute <code class="docutils literal notranslate"><span class="pre">checkpatch</span></code> on each &amp; every <code class="docutils literal notranslate"><span class="pre">.c</span></code> file then he can use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;\.c</span>$<span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>&lt;/path/to/&gt;/checkpatch.pl<span class="w"> </span>--no-tree<span class="w"> </span>--file
+</pre></div>
+</div>
+<p>In our case, <code class="docutils literal notranslate"><span class="pre">checkpath</span></code> has being copied into the repo so we can execute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;\.c</span>$<span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>./scripts/checkpatch.pl<span class="w"> </span>--no-tree<span class="w"> </span>--file
 </pre></div>
 </div>
 </section>
