@@ -20,4 +20,5 @@ documentation for details.
    build_image
    run_qemu
    generate_docs
+   solutions
 

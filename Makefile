@@ -4,6 +4,7 @@ DEFAULT_BRANCH      := master
 GITHUB_PAGES_BRANCH := gh-pages
 COMMIT_ID           := $(shell git rev-parse $(DEFAULT_BRANCH))
 COMMIT_MSG          := $(addprefix Documentation for commit ,$(COMMIT_ID))
+VIRTUAL_ENVIRONMENT := .venv
 
 # override the default shell (/bin/bash) so source would be possible.
 SHELL := /bin/bash
@@ -27,17 +28,21 @@ savedefconfig:
 clean-build:
 	make -C buildroot clean
 
+$(VIRTUAL_ENVIRONMENT):
+	virtualenv $(VIRTUAL_ENVIRONMENT)
+	source $(VIRTUAL_ENVIRONMENT)/bin/activate && pip install -r docs/requirements.txt
+
 .PHONY: docs
-docs:
-	make -C docs/ html
+docs: $(VIRTUAL_ENVIRONMENT)
+	source $(VIRTUAL_ENVIRONMENT)/bin/activate && make -C docs/ html
 
 .PHONY: publish-docs
 publish-docs: docs
 	cd $(DOCS_BUILD_DIR) && git add -A . && git commit --allow-empty -sm "$(COMMIT_MSG)." && git push origin $(GITHUB_PAGES_BRANCH)
 
 .PHONY: clean-docs
-clean-docs:
-	make -C docs/ clean
+clean-docs: $(VIRTUAL_ENVIRONMENT)
+	source $(VIRTUAL_ENVIRONMENT)/bin/activate && make -C docs/ clean
 
 .PHONY: clean
 clean: clean-build clean-docs

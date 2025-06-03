@@ -6,6 +6,9 @@ source "$BR2_EXTERNAL_EUDYPTULA_PATH/package/solution-1/Config.in"
 # Solution for challenge #4
 source "$BR2_EXTERNAL_EUDYPTULA_PATH/package/solution-4/Config.in"
 
+# Solution for challenge #6
+source "$BR2_EXTERNAL_EUDYPTULA_PATH/package/solution-6/Config.in"
+
 # hello
 source "$BR2_EXTERNAL_EUDYPTULA_PATH/package/hello/Config.in"
 
