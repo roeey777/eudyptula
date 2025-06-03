@@ -1,0 +1,6 @@
+config BR2_PACKAGE_SOLUTION_6
+    bool "solution #6"
+    default n
+    depends on BR2_LINUX_KERNEL
+    help
+        Solution for eudyptula challenge #6 - a misc char device.
