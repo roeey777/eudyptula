@@ -5,11 +5,23 @@ GITHUB_PAGES_BRANCH := gh-pages
 COMMIT_ID           := $(shell git rev-parse $(DEFAULT_BRANCH))
 COMMIT_MSG          := $(addprefix Documentation for commit ,$(COMMIT_ID))
 
+# override the default shell (/bin/bash) so source would be possible.
+SHELL := /bin/bash
+
 .PHONY: all
 all:
-	source activate.sh
-	make -C buildroot/ eudyptula_qemu_x86_64_defconfig
-	make -C buildroot all
+	@if [ ! -f buildroot/.config ]; then \
+		source activate.sh && make -C buildroot/ eudyptula_qemu_x86_64_defconfig; \
+	fi
+	source activate.sh && make -C buildroot all
+
+.PHONY: defconfig
+defconfig:
+	source activate.sh && make -C buildroot/ eudyptula_qemu_x86_64_defconfig
+
+.PHONY: savedefconfig
+savedefconfig:
+	source activate.sh && make -C buildroot savedefconfig
 
 .PHONY: clean-build
 clean-build:
