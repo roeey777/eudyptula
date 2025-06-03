@@ -103,6 +103,7 @@ modprobe<span class="w"> </span>solution_6<span class="w">                 </spa
 dmesg<span class="w"> </span>-c<span class="w">                            </span><span class="c1"># see the loading logs of the module.</span>
 lsmod<span class="w">                               </span><span class="c1"># see that the module is currently loaded.</span>
 ls<span class="w"> </span>/dev/eudyptula<span class="w">                   </span><span class="c1"># verify that there is char device.</span>
+cat<span class="w"> </span>/dev/eudyptula<span class="w">                  </span><span class="c1"># see roeey777 (i.e. the id) printed out.</span>
 <span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span>eudyptula<span class="w"> </span>&gt;<span class="w"> </span>/dev/eudyptula<span class="w">  </span><span class="c1"># write the &quot;secret&quot; into the device.</span>
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">                             </span><span class="c1"># expect to see 0, indicating success.</span>
 dmesg<span class="w"> </span>-c<span class="w">                            </span><span class="c1"># verify there is no error logs.</span>

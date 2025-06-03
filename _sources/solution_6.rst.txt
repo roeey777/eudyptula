@@ -16,6 +16,7 @@ The testing flow is as follows:
    dmesg -c                            # see the loading logs of the module.
    lsmod                               # see that the module is currently loaded.
    ls /dev/eudyptula                   # verify that there is char device.
+   cat /dev/eudyptula                  # see roeey777 (i.e. the id) printed out.
    echo -n eudyptula > /dev/eudyptula  # write the "secret" into the device.
    echo $?                             # expect to see 0, indicating success.
    dmesg -c                            # verify there is no error logs.
