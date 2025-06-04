@@ -16,7 +16,7 @@ index 9b6c90eed5e9..26ae3a270822 100644
 @@ -2,7 +2,7 @@
  VERSION = 6
  PATCHLEVEL = 12
- SUBLEVEL = 20
+ SUBLEVEL = 28
 -EXTRAVERSION =
 +EXTRAVERSION = -eudyptula-challenge-solution-3
  NAME = Baby Opossum Posse
