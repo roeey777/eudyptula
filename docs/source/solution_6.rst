@@ -1,5 +1,5 @@
-Solution to Challenge #6
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Solution to Challenge #6 - misc char device
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this challenge, I was asked to implement a small misc char device which controls the
 return code of the syscall ``write`` based on the given data from the user. If the given data
