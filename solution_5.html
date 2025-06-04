@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solutions &mdash; Eudyptula  documentation</title>
+  <title>Solution to Challenge #5 - udev &mdash; Eudyptula  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -28,8 +28,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Solution to Challenge #3 - patching the kernel code" href="solution_3.html" />
-    <link rel="prev" title="Generate The Documentation" href="generate_docs.html" /> 
+    <link rel="next" title="Solution to Challenge #6 - misc char device" href="solution_6.html" />
+    <link rel="prev" title="Solution to Challenge #3 - patching the kernel code" href="solution_3.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,9 +58,9 @@
 <li class="toctree-l1"><a class="reference internal" href="build_image.html">Building an Image</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run_qemu.html">Running in QEMU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate_docs.html">Generate The Documentation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Solutions</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="solutions.html">Solutions</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="solution_3.html">Solution to Challenge #3 - patching the kernel code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solution_5.html">Solution to Challenge #5 - udev</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Solution to Challenge #5 - udev</a></li>
 <li class="toctree-l2"><a class="reference internal" href="solution_6.html">Solution to Challenge #6 - misc char device</a></li>
 <li class="toctree-l2"><a class="reference internal" href="solution_8.html">Solution to Challenge #8 - debugsfs</a></li>
 </ul>
@@ -81,9 +81,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Solutions</li>
+          <li class="breadcrumb-item"><a href="solutions.html">Solutions</a></li>
+      <li class="breadcrumb-item active">Solution to Challenge #5 - udev</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/solutions.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/solution_5.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,17 +92,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="solutions">
-<h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading"></a></h1>
-<p>This page is merely a table of contents for various solution to the challenges.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Solutions to Challenges:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="solution_3.html">Solution to Challenge #3 - patching the kernel code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solution_5.html">Solution to Challenge #5 - udev</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solution_6.html">Solution to Challenge #6 - misc char device</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solution_8.html">Solution to Challenge #8 - debugsfs</a></li>
-</ul>
+  <section id="solution-to-challenge-5-udev">
+<h1>Solution to Challenge #5 - udev<a class="headerlink" href="#solution-to-challenge-5-udev" title="Link to this heading"></a></h1>
+<p>In this challenge I’m asked to load my dummy kernel module whenever a USB keyboard is attached to the system.
+Since I’m using <code class="docutils literal notranslate"><span class="pre">`QEMU`</span></code> this requires adding a new flag (<code class="docutils literal notranslate"><span class="pre">`-usb`</span></code>) to the invokation of <code class="docutils literal notranslate"><span class="pre">`qemu`</span></code> like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qemu-system-x86_64<span class="w"> </span>-M<span class="w"> </span>pc<span class="w"> </span>-kernel<span class="w"> </span>buildroot/output/images/bzImage<span class="w"> </span>-drive<span class="w"> </span><span class="nv">file</span><span class="o">=</span>buildroot/output/images/rootfs.ext2,if<span class="o">=</span>virtio,format<span class="o">=</span>raw<span class="w"> </span>-append<span class="w"> </span><span class="s2">&quot;rootwait root=/dev/vda console=tty1 console=ttyS0&quot;</span><span class="w"> </span>-usb<span class="w"> </span>-serial<span class="w"> </span>stdio<span class="w"> </span>-net<span class="w"> </span>nic,model<span class="o">=</span>virtio<span class="w"> </span>-net<span class="w"> </span>user
+</pre></div>
+</div>
+<p>Now we can tell <code class="docutils literal notranslate"><span class="pre">`qemu`</span></code> when to add the USB keyboard from it’s monitoring interface.
+On the newly openned window press Cntl-Alt-2 which will switch that window into the management interface of <code class="docutils literal notranslate"><span class="pre">`qemu`</span></code>.
+From within this interface type <code class="docutils literal notranslate"><span class="pre">`device_add</span> <span class="pre">usb-kbd`</span></code></p>
+<p>This behavior was achieved by leveraging the functionality of <code class="docutils literal notranslate"><span class="pre">eudev</span></code> (which is <code class="docutils literal notranslate"><span class="pre">udev</span></code> extracted from <code class="docutils literal notranslate"><span class="pre">systemd</span></code> bloatware),
+i.e. by adding a new <code class="docutils literal notranslate"><span class="pre">udev</span></code> rule for the USB keyboard supported by <code class="docutils literal notranslate"><span class="pre">QEMU</span></code> like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># contents of the file: /etc/udev/rules.d/99-qemu-usb-kbd.rules</span>
+
+<span class="n">ACTION</span><span class="o">==</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;usb&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idVendor</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;0627&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idProduct</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;0001&quot;</span><span class="p">,</span> <span class="n">RUN</span><span class="o">+=</span><span class="s2">&quot;/sbin/modprobe solution_1&quot;</span>
+</pre></div>
 </div>
 </section>
 
@@ -109,8 +115,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="generate_docs.html" class="btn btn-neutral float-left" title="Generate The Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="solution_3.html" class="btn btn-neutral float-right" title="Solution to Challenge #3 - patching the kernel code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="solution_3.html" class="btn btn-neutral float-left" title="Solution to Challenge #3 - patching the kernel code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="solution_6.html" class="btn btn-neutral float-right" title="Solution to Challenge #6 - misc char device" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
