@@ -6,9 +6,11 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Eudyptula'
-copyright = '2025, Eyal Royee'
-author = 'Eyal Royee'
+from datetime import date
+
+project = "Eudyptula"
+author = "Eyal Royee"
+copyright = f"{date.today().year}, {author}"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -22,7 +24,7 @@ extensions = [
     "sphinx_rtd_dark_mode",
 ]
 
-templates_path = ['templates']
+templates_path = ["templates"]
 exclude_patterns = []
 
 
@@ -31,7 +33,7 @@ exclude_patterns = []
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_rtd_theme"
-html_static_path = ['static']
+html_static_path = ["static"]
 
 
 # -- Custom configuration ----------------------------------------------------
