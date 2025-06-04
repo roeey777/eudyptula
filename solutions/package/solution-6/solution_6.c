@@ -13,9 +13,9 @@
 #define EUDYPTULA_DEVICE_NAME "eudyptula"
 #define EUDYPTULA_MISC_BUFFER_SIZE 256
 
-static const char *ID = "roeey777";
+static const char ID[] = "roeey777";
 static const size_t ID_LENGTH = sizeof(ID) / sizeof(*ID);
-static const char *SECRET = "eudyptula";
+static const char SECRET[] = "eudyptula";
 static const size_t SECRET_LENGTH = sizeof(SECRET) / sizeof(*SECRET);
 static char misc_buffer[EUDYPTULA_MISC_BUFFER_SIZE];
 

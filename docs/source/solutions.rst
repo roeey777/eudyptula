@@ -9,4 +9,5 @@ This page is merely a table of contents for various solution to the challenges.
    :caption: Solutions to Challenges:
 
    solution_6
+   solution_8
 
