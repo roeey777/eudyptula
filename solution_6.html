@@ -63,6 +63,7 @@
 <li class="toctree-l2"><a class="reference internal" href="solution_5.html">Solution to Challenge #5 - udev</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Solution to Challenge #6 - misc char device</a></li>
 <li class="toctree-l2"><a class="reference internal" href="solution_8.html">Solution to Challenge #8 - debugsfs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solution_9.html">Solution to Challenge #9 - sysfs</a></li>
 </ul>
 </li>
 </ul>
@@ -93,7 +94,7 @@
            <div itemprop="articleBody">
              
   <section id="solution-to-challenge-6-misc-char-device">
-<h1>Solution to Challenge #6 - misc char device<a class="headerlink" href="#solution-to-challenge-6-misc-char-device" title="Link to this heading"></a></h1>
+<span id="challenge-6"></span><h1>Solution to Challenge #6 - misc char device<a class="headerlink" href="#solution-to-challenge-6-misc-char-device" title="Link to this heading"></a></h1>
 <p>In this challenge, I was asked to implement a small misc char device which controls the
 return code of the syscall <code class="docutils literal notranslate"><span class="pre">write</span></code> based on the given data from the user. If the given data
 matches the secret then the return code should be valid, otherwise <code class="docutils literal notranslate"><span class="pre">EINVAL</span></code> should be returned,

@@ -1,3 +1,5 @@
+.. _build_image:
+
 Building an Image
 ~~~~~~~~~~~~~~~~~
 
