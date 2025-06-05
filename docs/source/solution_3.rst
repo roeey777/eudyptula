@@ -1,3 +1,5 @@
+.. _challenge_3:
+
 Solution to Challenge #3 - patching the kernel code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

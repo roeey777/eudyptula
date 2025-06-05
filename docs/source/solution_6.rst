@@ -1,3 +1,5 @@
+.. _challenge_6:
+
 Solution to Challenge #6 - misc char device
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

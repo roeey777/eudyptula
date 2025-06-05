@@ -12,6 +12,9 @@ source "$BR2_EXTERNAL_EUDYPTULA_PATH/package/solution-6/Config.in"
 # Solution for challenge #8
 source "$BR2_EXTERNAL_EUDYPTULA_PATH/package/solution-8/Config.in"
 
+# Solution for challenge #9
+source "$BR2_EXTERNAL_EUDYPTULA_PATH/package/solution-9/Config.in"
+
 # hello
 source "$BR2_EXTERNAL_EUDYPTULA_PATH/package/hello/Config.in"
 

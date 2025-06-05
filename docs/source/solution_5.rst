@@ -1,3 +1,5 @@
+.. _challenge_5:
+
 Solution to Challenge #5 - udev
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
