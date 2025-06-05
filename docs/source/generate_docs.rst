@@ -1,3 +1,5 @@
+.. _generate docs:
+
 Generate The Documentation
 --------------------------
 

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_SOLUTION_9
+    bool "solution #9"
+    default n
+    depends on BR2_LINUX_KERNEL
+    help
+        Solution for eudyptula challenge #9 - driver with sysfs
