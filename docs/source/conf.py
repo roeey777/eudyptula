@@ -27,7 +27,10 @@ extensions = [
 templates_path = ["templates"]
 exclude_patterns = []
 
-
+# Enables nitpicky mode if True.
+# In nitpicky mode, Sphinx will warn about all references where the target cannot be found.
+# This is recommended for new projects as it ensures that all references are to valid targets.
+nitpicky = True
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
