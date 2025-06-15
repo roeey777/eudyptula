@@ -21,6 +21,7 @@ documentation for details.
    checkpatch
    build_image
    run_qemu
+   creating-a-patch-to-a-package-in-buildroot
    generate_docs
    solutions
 
