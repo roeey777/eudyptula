@@ -16,13 +16,24 @@ copyright = f"{date.today().year}, {author}"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    "sphinx.ext.todo",
-    "sphinx.ext.viewcode",
-    "sphinx.ext.autodoc",
-    "sphinx.ext.githubpages",
-    "sphinx_copybutton",
-    "sphinx_rtd_dark_mode",
+    # sphinx-builtin extensions
+    "sphinx.ext.duration",       # Measure durations of Sphinx processing.
+    "sphinx.ext.todo",           # Support for todo items & todolist in sphinx.
+    "sphinx.ext.viewcode",       # Add links to highlighted source code.
+    "sphinx.ext.autodoc",        # Include documentation from docstrings.
+    "sphinx.ext.githubpages",    # Adds .nojekyll so everythings works in gh-pages.
+
+    # sphinx external extensions
+    "myst_parser",               # To support Markdown-based documentation, Sphinx can use MyST-Parser.
+    "sphinx_copybutton",         # Adds a copy button to each code block.
+    "sphinx_rtd_dark_mode",      # Adds dark-mode theme to read-the-docs theme.
+    "sphinxcontrib.shellcheck",  # Use shellcheck **inside** code blocks.
 ]
+
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
 templates_path = ["templates"]
 exclude_patterns = []

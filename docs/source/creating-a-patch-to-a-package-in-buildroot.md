@@ -1,13 +1,13 @@
 # Creating a Patch to a Package in Buildroot using ``Git``:
 
 
-### First Step - getting a clone of the code.
+## First Step - getting a clone of the code.
 There are 2 ways to do so:
 - use ``buildroot`` to fetch the source code for us.
 - fetch the source code manually.
 
 
-#### Fetching Source Code Using ``Buildroot``:
+### Fetching Source Code Using ``Buildroot``:
 ```bash
 	make <package-name>-source
 ```
@@ -48,7 +48,7 @@ In Linux case:
 ```
 
 
-### Second Step - Modifying The Source Code:
+## Second Step - Modifying The Source Code:
 In this stage we should modify source code as we like.
 After all the modifications were saved a ``git`` commit should be created.
 The commit message should be meaningless since it will be included in the patch file.
@@ -57,7 +57,7 @@ The commit message should be meaningless since it will be included in the patch 
 ```
 
 
-### Third & Final Step - Creating The Patch File:
+## Third & Final Step - Creating The Patch File:
 In order for us to create the patch file we will use ``git`` since ``git format-patch``
 can create patch files which includes commit messages.
 Creating patches is simple, it only requires executing the following command:
