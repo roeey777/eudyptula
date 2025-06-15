@@ -1,3 +1,4 @@
 dl/
 solutions/configs/*.old
 docs/build/html/
+docs/build/doctrees/
